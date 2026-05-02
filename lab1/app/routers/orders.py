@@ -19,12 +19,7 @@ async def create_order(
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """
-    Створити замовлення (продаж книг).
 
-    Ключовий інваріант: не можна продати більше книг, ніж є на складі.
-    Вся бізнес-логіка зосереджена прямо тут, у контролері — це "baseline" підхід lab1.
-    """
     order_items: list[OrderItem] = []
     total_price = 0.0
 
@@ -84,7 +79,6 @@ async def list_orders(
     db: AsyncSession = Depends(get_db),
     _current_user: User = Depends(get_current_user),
 ):
-    """Отримати список замовлень з пагінацією."""
     query = select(Order).options(selectinload(Order.items))
 
     if status_filter:
@@ -101,7 +95,6 @@ async def get_order(
     db: AsyncSession = Depends(get_db),
     _current_user: User = Depends(get_current_user),
 ):
-    """Отримати деталі замовлення."""
     result = await db.execute(
         select(Order).where(Order.id == order_id).options(selectinload(Order.items))
     )

@@ -6,8 +6,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "super-secret-key-change-in-production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
-
-    LOW_STOCK_THRESHOLD: int = 3  
+    LOW_STOCK_THRESHOLD: int = 3
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 

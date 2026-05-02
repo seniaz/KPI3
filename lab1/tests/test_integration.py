@@ -64,7 +64,6 @@ class TestAuthEndpoints:
         assert resp.status_code == 401
 
 
-# ─── Books ───────────────────────────────────────────────────────────────────
 
 
 class TestBookEndpoints:
@@ -152,7 +151,6 @@ class TestBookEndpoints:
         assert resp.json()["quantity"] == 30  # 10 + 20
 
 
-# ─── Orders ──────────────────────────────────────────────────────────────────
 
 
 class TestOrderEndpoints:

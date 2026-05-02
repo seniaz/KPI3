@@ -2,8 +2,9 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.database import Base, engine
-from app.routers import auth, books, orders
+from app.infrastructure.database import Base, engine
+from app.presentation.exception_handlers import register_exception_handlers
+from app.presentation.routers import auth, books, orders
 
 
 @asynccontextmanager
@@ -16,10 +17,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="SmartBook Inventory",
-    description="Система управління книжковим складом — Lab 1",
-    version="1.0.0",
+    description="Система управління книжковим складом — Lab 2",
+    version="2.0.0",
     lifespan=lifespan,
 )
+
+register_exception_handlers(app)
 
 app.include_router(auth.router)
 app.include_router(books.router)
@@ -28,4 +31,4 @@ app.include_router(orders.router)
 
 @app.get("/", tags=["Health"])
 async def root():
-    return {"status": "ok", "service": "SmartBook Inventory", "lab": 1}
+    return {"status": "ok", "service": "SmartBook Inventory", "lab": 2}
